@@ -1,0 +1,107 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class WeeklyCodingChallenge {
+    public static void reorderDigits(ArrayList<Integer> digits, String order) {
+        int temp = 0;
+        String combined = "";
+        ArrayList<Integer> tempDigits = new ArrayList<Integer>();
+        ArrayList<Integer> finalDigits = new ArrayList<Integer>();
+        if(order.equals("asc")) {
+            System.out.println("Ascending...");
+            for(int i = 0; i<digits.size();i++) {
+                temp = digits.get(i);
+                while(temp>0){
+                    tempDigits.add(temp%10);
+                    temp = temp/10;
+                }
+                Collections.sort(tempDigits);
+                for(int j = 0; j<tempDigits.size();j++){
+                    combined = combined+tempDigits.get(j);
+                }
+                tempDigits.clear();
+                finalDigits.add(Integer.valueOf(combined));
+                combined ="";
+            }
+            System.out.println(finalDigits);
+        } else {
+            System.out.println("Descending...");
+            for (Integer digit : digits) {
+                temp = digit;
+                while (temp > 0) {
+                    tempDigits.add(temp % 10);
+                    temp = temp / 10;
+                }
+                Collections.sort(tempDigits, Collections.reverseOrder());
+                for (Integer tempDigit : tempDigits) {
+                    combined = combined + tempDigit;
+                }
+                tempDigits.clear();
+                finalDigits.add(Integer.valueOf(combined));
+                combined = "";
+            }
+            System.out.println(finalDigits);
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner (System.in);
+        ArrayList<Integer> digits = new ArrayList<Integer>();
+        System.out.println("Please enter an integer or a negative integer to stop");
+        int input = scanner.nextInt();
+        while(input>=0) {
+            digits.add(input);
+            input = scanner.nextInt();
+        }
+        System.out.println("Please enter an order: asc/desc");
+        String order = scanner.next();
+        while(!order.equals("asc")&&!order.equals("desc")) {
+            System.out.println("Please enter an order: asc/desc");
+            order = scanner.next();
+        }
+        reorderDigits(digits,order);
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class WeeklyCodingChallenge2 {
+    public static boolean canPartition(ArrayList<Integer> partition) {
+        ArrayList<Integer> tempPartition = new ArrayList<Integer>();
+        int combined = 1;
+        int avoid=0;
+        for(int i=0;i< partition.size();i++) {
+            avoid = partition.get(i);
+            for (int j = 0; j < partition.size(); j++) {
+                if (partition.get(j) != avoid) {
+                    tempPartition.add(partition.get(j));
+                }
+            }
+            for (int numbers : tempPartition) {
+                combined = combined * numbers;
+            }
+            if (avoid == combined) {
+                return true;
+            } else {
+                tempPartition.clear();
+                combined = 1;
+            }
+        }
+        return false;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner (System.in);
+        ArrayList<Integer> partition = new ArrayList<Integer>();
+        System.out.println("Please enter elements in an array, enter 0 to stop");
+        int input = scanner.nextInt();
+        while(input!=0) {
+            partition.add(input);
+            input = scanner.nextInt();
+        }
+        System.out.println(canPartition(partition));
+    }
+}
+
