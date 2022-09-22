@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class WeeklyCodingChallenge3 {
+    public static void secondMaximum(LinkedHashSet<Integer> numbers) {
+        ArrayList<Integer> secondMax = new ArrayList<Integer>();
+        Iterator<Integer> iterator = numbers.iterator();
+        Integer currentNum =0;
+        int i = 0;
+        while (iterator.hasNext()) {
+            secondMax.add(currentNum=iterator.next());
+            if (secondMax.size()==3) {
+                int returnNum =0;
+                Collections.sort(secondMax);
+                returnNum = secondMax.get(1);
+                System.out.println(returnNum);
+                secondMax.clear();
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner (System.in);
+        LinkedHashSet<Integer> numbers = new LinkedHashSet<Integer>();
+        System.out.println("Please enter elements in the array, enter 0 to stop");
+        int input = scanner.nextInt();
+        while(input!=0) {
+            numbers.add(input);
+            input = scanner.nextInt();
+        }
+        secondMaximum(numbers);
+    }
+}
+--------------------------------------------------------------------------------------------------------------------
+
+import java.util.Scanner;
+
+public class WeeklyCodingChallenge4 {
+    public static void digitsTotal(String input){
+        char[] digits = new char[]{'1','2','3','4','5','6','7','8','9','0'};
+        char[] inputChar = input.toCharArray();
+        int output=0;
+        for(char i : inputChar) {
+            for( char j : digits) {
+                if(i == j) {
+                    output = output + Character.getNumericValue(i);
+                }
+            }
+        }
+        System.out.println(output);
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner (System.in);
+        System.out.println("Please enter something");
+        String input = scanner.nextLine();
+        digitsTotal(input);
+    }
+}
