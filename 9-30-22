@@ -1,0 +1,28 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class WeeklyCodingChallenge5 {
+    public static void maxGap(ArrayList<Integer> largeGap){
+        Collections.sort(largeGap);
+        int output=0;
+        for(int i =0;i<largeGap.size()-1;i++){
+            int gap = largeGap.get(i+1)-largeGap.get(i);
+            if(gap>output) {
+                output = gap;
+            }
+        }
+        System.out.println(output);
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner (System.in);
+        ArrayList<Integer> gap = new ArrayList<Integer>();
+        System.out.println("Please enter a number or a negative to stop");
+        int input = scanner.nextInt();
+        while(input>=0) {
+            gap.add(input);
+            input = scanner.nextInt();
+        }
+        maxGap(gap);
+    }
+}
